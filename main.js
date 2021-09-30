@@ -1,7 +1,6 @@
 var mainApp = {};
 var lastPredictID = null;
 (function(){
-    let scanButton = document.getElementById("scanButton");
     var firebase = app_fireBase;
     firebase.auth().onAuthStateChanged(function(user) {
         if(user){
@@ -31,9 +30,9 @@ var lastPredictID = null;
         }
     }
 
-    window.addEventListener("load", function(event) {
+    window.addEventListener("load", async () => {
         textField.innerHTML = ("Reading NFC");
-
+      
         try {
           const ndef = new NDEFReader();
           await ndef.scan();
@@ -42,7 +41,7 @@ var lastPredictID = null;
           ndef.addEventListener("readingerror", () => {
             textField.innerHTML = ("Argh! Cannot read data from the NFC tag. Try another one?");
           });
-
+    
           ndef.addEventListener("reading", ({ _, serialNumber }) => {
             textField.innerHTML = (`> Serial Number: ${serialNumber}`);
             var path = 'scans/';
@@ -54,6 +53,7 @@ var lastPredictID = null;
         }
       }
     );
+
     
     var updatePlasticIcon = function(id, text) {
 
