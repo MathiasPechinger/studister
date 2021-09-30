@@ -53,7 +53,7 @@ var lastPredictID = null;
                 textField.innerHTML = (`> Serial Number: ${serialNumber}`);
 
                 registerButton.addEventListener("click", async () => {
-                    var info_var = document.getElementById("valid");
+                    var info_var = document.getElementById("valid").value;
                     textField.innerHTML = (`Registering user is ${info_var}`);
                 })
 
