@@ -49,35 +49,48 @@ var lastPredictID = null;
                 textField.innerHTML = ("Argh! Cannot read data from the NFC tag. Try another one?");
             });
         
+            // Wait for NFC Scan
             ndef.addEventListener("reading", ({ _, serialNumber }) => {
                 textField.innerHTML = (`> Serial Number: ${serialNumber}`);
 
+                // Wait for user entry
                 registerButton.addEventListener("click", async () => {
                     var info_var = document.getElementById("valid").value;
-                    textField.innerHTML = (`Registering user is ${info_var}`);
+                    var info_bool = Boolean(info_var);
+                    textField.innerHTML = (`Registering user is ${info_var} bool ${info_bool}`);
+                    
+                    // write the data
+                    var path = 'users/';
+                    var data = {
+                        serialNumber: `${serialNumber}`,
+                        access: `${info_var}`
+                    };
+                    app_fireBase.database().ref(path).push(data);                   
                 })
 
-                var accessAllowed = false;
+                // var accessAllowed = false;
+                // const dbRef = app_fireBase.database().ref();
 
-                const dbRef = app_fireBase.database().ref();
+                // //read the data
+                // dbRef.child(`users/${serialNumber}`).get().then((snapshot) => {
+                // if (snapshot.exists()) {
+                //     console.log(snapshot.val());
+                //     accessAllowed = snapshot.val();
+                // } else {
+                //     console.log("No data available");
+                // }
+                // }).catch((error) => {
+                // console.error(error);
+                // });
 
-                dbRef.child(`users/${serialNumber}`).get().then((snapshot) => {
-                if (snapshot.exists()) {
-                    console.log(snapshot.val());
-                    accessAllowed = snapshot.val();
-                } else {
-                    console.log("No data available");
-                }
-                }).catch((error) => {
-                console.error(error);
-                });
 
-                var path = 'users/';
-                var data = {
-                    serialNumber: `${serialNumber}`,
-                    access: accessAllowed
-                };
-                app_fireBase.database().ref(path).push(data);
+                // //write the data
+                // var path = 'users/';
+                // var data = {
+                //     serialNumber: `${serialNumber}`,
+                //     access: accessAllowed
+                // };
+                // app_fireBase.database().ref(path).push(data);
             });
         } catch (error) {
             textField.innerHTML = ("Argh! " + error);
