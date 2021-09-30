@@ -39,8 +39,8 @@ var lastPredictID = null;
         document.getElementById("scan_button").disabled = true;
     }
 
-    scanButton.addEventListener("click", async () => {
-        textField.innerHTML = ("User clicked scan button");
+    document.addEventListener("onload", async () => {
+        textField.innerHTML = ("Reading NFC");
       
         try {
           const ndef = new NDEFReader();
