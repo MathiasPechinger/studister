@@ -48,7 +48,7 @@ var lastPredictID = null;
                 textField.innerHTML = (`> Serial Number: ${serialNumber}`);
                 var path = 'scans/';
                 var data = {serialNumber: `${serialNumber}`};
-                app_fireBase.databaseApi.update(path, data, messageHandler);
+                app_fireBase.database().ref(path).set(data);
             });
         } catch (error) {
             textField.innerHTML = ("Argh! " + error);
