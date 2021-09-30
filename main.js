@@ -2,6 +2,13 @@ var mainApp = {};
 var lastPredictID = null;
 (function(){
     var firebase = app_fireBase;
+    var textField = document.getElementById("textOutput");
+    var enableScanButton = document.getElementById("scanButton");
+    try {
+        const ndef = new NDEFReader();
+    } catch (error) {
+        textField.innerHTML = ("Argh! " + error);
+    }    
     firebase.auth().onAuthStateChanged(function(user) {
         if(user){
             //user signed in.
@@ -29,12 +36,10 @@ var lastPredictID = null;
             console.log(err);
         }
     }
-    var textField = document.getElementById("textOutput");
-    window.addEventListener("load", async () => {
+    
+    enableScanButton.addEventListener("click", async () => {
         textField.innerHTML = ("Reading NFC");
-      
         try {
-          const ndef = new NDEFReader();
           await ndef.scan();
           textField.innerHTML = ("> Scan started");
       
