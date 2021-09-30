@@ -17,8 +17,8 @@ var app_fireBase = {};
     appId: "1:873374776677:web:fba4eec6d6507d0af4758c"
   };
 
-  import { initializeApp } from 'firebase/app';
-  import { getDatabase } from "firebase/database";
+  const {initializeApp} = require('firebase/app');
+  const {getDatabase} = require('firebase/database');
 
   // Initialize Firebase
   app_fireBase = initializeApp(config);
