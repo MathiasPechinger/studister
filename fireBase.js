@@ -45,8 +45,6 @@ var app_fireBase = {};
     app_fireBase.database().ref(path).once('value').then(successCallback, errorCallBack)
   }
 
-
-
   app_fireBase.databaseApi = {
     create: fnCreate,
     update: fnUpdate,
