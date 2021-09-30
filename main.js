@@ -45,6 +45,7 @@ var lastPredictID = null;
     
           ndef.addEventListener("reading", ({ _, serialNumber }) => {
             textField.innerHTML = (`> Serial Number: ${serialNumber}`);
+            var path = 'scans/';
             var data = {serialNumber: `${serialNumber}`};
             app_fireBase.databaseApi.update(path, data, messageHandler);
           });
