@@ -4,7 +4,7 @@ var app_fireBase = {};
   const config = {
     apiKey: "AIzaSyDRNEQbVnhlmbimWlWkmOi_WcW-EP1Bk8c",
     authDomain: "studister-4b944.firebaseapp.com",
-    databaseURL: "https://studister-4b944-default-rtdb.europe-west1.firebaseio.com",
+    databaseURL: "https://studister-4b944-default-rtdb.europe-west1.firebasedatabase.app",
     projectId: "studister-4b944",
     storageBucket: "studister-4b944.appspot.com",
     messagingSenderId: "873374776677",
