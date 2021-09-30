@@ -1,4 +1,6 @@
 var app_fireBase = {};
+import { initializeApp } from 'firebase/app';
+import { getDatabase } from "firebase/database";
 (function(){
   // Import the functions you need from the SDKs you need
   // import { initializeApp } from "firebase/app";
@@ -17,9 +19,8 @@ var app_fireBase = {};
   };
 
   // Initialize Firebase
-  firebase.initializeApp(config);
+  app_fireBase = initializeApp(config);
 
-  app_fireBase = firebase;
   const database = getDatabase(app_fireBase);
 
   function fnCreate(path, body, callBack){
