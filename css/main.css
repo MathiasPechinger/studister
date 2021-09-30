@@ -120,6 +120,16 @@ header {
     border-radius: 15px;
 }
 
+.register_input_form_container{
+    background-color: none;
+    width: 200px;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+
+}
+
 .result_wrap {
     text-align: justify;
     margin-top: 16px;
