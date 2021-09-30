@@ -1,6 +1,7 @@
 var mainApp = {};
 var lastPredictID = null;
 (function(){
+    let scanButton = document.getElementById("scanButton");
     var firebase = app_fireBase;
     firebase.auth().onAuthStateChanged(function(user) {
         if(user){
@@ -30,13 +31,28 @@ var lastPredictID = null;
         }
     }
 
-    function scan(){
-        var path = 'devices/your_device_id/control/';
-        var data = {measure: 'true'};
-        app_fireBase.databaseApi.update(path, data, messageHandler);
-        hidePlasticIcon();
-        document.getElementById("scan_button").disabled = true;
-    }
+    scanButton.addEventListener("click", async () => {
+        textField.innerHTML = ("User clicked scan button");
+      
+        try {
+          const ndef = new NDEFReader();
+          await ndef.scan();
+          textField.innerHTML = ("> Scan started");
+      
+          ndef.addEventListener("readingerror", () => {
+            textField.innerHTML = ("Argh! Cannot read data from the NFC tag. Try another one?");
+          });
+    
+          ndef.addEventListener("reading", ({ _, serialNumber }) => {
+            textField.innerHTML = (`> Serial Number: ${serialNumber}`);
+            var data = {serialNumber: `${serialNumber}`};
+            app_fireBase.databaseApi.update(path, data, messageHandler);
+          });
+        } catch (error) {
+            textField.innerHTML = ("Argh! " + error);
+        }
+      }
+    );
 
     
     var updatePlasticIcon = function(id, text) {
