@@ -25,7 +25,7 @@ var lastPredictID = null;
     var enableScanButton = document.getElementById("scanButton");
     enableScanButton.addEventListener("click", async () => {
         textField.innerHTML = ("Reading NFC");
-        app_fireBase.database().ref().child("users").then((snapshot) => {
+        app_fireBase.database().ref("/users").then((snapshot) => {
             if (snapshot.exists()) {
               console.log(snapshot.val());
             } else {
