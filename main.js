@@ -1,14 +1,7 @@
 var mainApp = {};
 var lastPredictID = null;
 (function(){
-    var firebase = app_fireBase;
-    var textField = document.getElementById("textOutput");
-    var enableScanButton = document.getElementById("scanButton");
-    try {
-        const ndef = new NDEFReader();
-    } catch (error) {
-        textField.innerHTML = ("Argh! " + error);
-    }    
+    var firebase = app_fireBase;  
     firebase.auth().onAuthStateChanged(function(user) {
         if(user){
             //user signed in.
@@ -36,23 +29,25 @@ var lastPredictID = null;
             console.log(err);
         }
     }
-    
+    var textField = document.getElementById("textOutput");
+    var enableScanButton = document.getElementById("scanButton");
     enableScanButton.addEventListener("click", async () => {
         textField.innerHTML = ("Reading NFC");
         try {
-          await ndef.scan();
-          textField.innerHTML = ("> Scan started");
-      
-          ndef.addEventListener("readingerror", () => {
-            textField.innerHTML = ("Argh! Cannot read data from the NFC tag. Try another one?");
-          });
-    
-          ndef.addEventListener("reading", ({ _, serialNumber }) => {
-            textField.innerHTML = (`> Serial Number: ${serialNumber}`);
-            var path = 'scans/';
-            var data = {serialNumber: `${serialNumber}`};
-            app_fireBase.databaseApi.update(path, data, messageHandler);
-          });
+            const ndef = new NDEFReader();
+            await ndef.scan();
+            textField.innerHTML = ("> Scan started");
+        
+            ndef.addEventListener("readingerror", () => {
+                textField.innerHTML = ("Argh! Cannot read data from the NFC tag. Try another one?");
+            });
+        
+            ndef.addEventListener("reading", ({ _, serialNumber }) => {
+                textField.innerHTML = (`> Serial Number: ${serialNumber}`);
+                var path = 'scans/';
+                var data = {serialNumber: `${serialNumber}`};
+                app_fireBase.databaseApi.update(path, data, messageHandler);
+            });
         } catch (error) {
             textField.innerHTML = ("Argh! " + error);
         }
