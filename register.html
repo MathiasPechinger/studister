@@ -11,13 +11,10 @@
 <body>
     <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 
-    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
-
-    <!-- Add Firebase products that you want to use -->
-    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
-
+    <script src="https://www.gstatic.com/firebasejs/9.1.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.0/firebase-auth-compat.js"></script>
 
     
     <div class="header_container">
@@ -28,7 +25,25 @@
             
     </div>
 
-    <script type="text/javascript">
+
+    <div class="container">
+        <!-- <button id="scan_button" class="scan" onclick="mainApp.scan()">SCAN</button> -->
+
+        <!-- <p id="textOutput"></p>
+        <button id="register_button" class="scan" type="button">Scan</button> -->
+
+        <p id="textOutput"></p>
+        <button id="scanRegButton" class="scan" type="button">Start Scan!</button>
+            <br>
+        <button id="registerButton" class="scan" type="button">Reg.!</button>
+      
+
+    </div>
+
+    <script src='fireBase.js'></script>
+    <script src='register.js'></script>
+
+    <!-- <script type="text/javascript">
 
         var Text = 'hello'
             function setInput(button) {
@@ -44,7 +59,7 @@
         <input type="submit" class="scan" name="submit_a" value="Register" onclick="setInput(this); return 
         false;"> 
         <input type="text" name="a" id="input_a">
-    </div>
+    </div> -->
 
 
     

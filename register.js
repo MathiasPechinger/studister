@@ -23,7 +23,9 @@ var lastPredictID = null;
     }
     var textField = document.getElementById("textOutput");
 
-    var enableScanButton = document.getElementById("scanButton");
+
+    var enableScanButton = document.getElementById("scanRegButton");
+    var registerButton = document.getElementById("registerButton");
 
     enableScanButton.addEventListener("click", async () => {
 
@@ -33,7 +35,7 @@ var lastPredictID = null;
         if (snapshot.exists()) {
             console.log(snapshot.val());
         } else {
-            console.log("No data available");
+            console.log("No data available for Reg");
         }
         }).catch((error) => {
         console.error(error);
@@ -49,8 +51,15 @@ var lastPredictID = null;
         
             ndef.addEventListener("reading", ({ _, serialNumber }) => {
                 textField.innerHTML = (`> Serial Number: ${serialNumber}`);
+
+                registerButton.addEventListener("click", async () => {
+                    textField.innerHTML = (`> Serial Number: ${serialNumber} Registering user`);
+                })
+
                 var accessAllowed = false;
+
                 const dbRef = app_fireBase.database().ref();
+
                 dbRef.child(`users/${serialNumber}`).get().then((snapshot) => {
                 if (snapshot.exists()) {
                     console.log(snapshot.val());
