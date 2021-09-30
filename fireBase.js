@@ -1,6 +1,5 @@
 var app_fireBase = {};
-import { initializeApp } from 'firebase/app';
-import { getDatabase } from "firebase/database";
+
 (function(){
   // Import the functions you need from the SDKs you need
   // import { initializeApp } from "firebase/app";
@@ -17,6 +16,9 @@ import { getDatabase } from "firebase/database";
     messagingSenderId: "873374776677",
     appId: "1:873374776677:web:fba4eec6d6507d0af4758c"
   };
+
+  import { initializeApp } from 'firebase/app';
+  import { getDatabase } from "firebase/database";
 
   // Initialize Firebase
   app_fireBase = initializeApp(config);
