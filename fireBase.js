@@ -1,13 +1,13 @@
 var app_fireBase = {};
-
 (function(){
+
   // Import the functions you need from the SDKs you need
-  // import { initializeApp } from "firebase/app";
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
 
   // Your web app's Firebase configuration
-  const config = {
+  const firebaseConfig = {
     apiKey: "AIzaSyDRNEQbVnhlmbimWlWkmOi_WcW-EP1Bk8c",
     authDomain: "studister-4b944.firebaseapp.com",
     databaseURL: "https://studister-4b944-default-rtdb.europe-west1.firebasedatabase.app",
@@ -17,28 +17,23 @@ var app_fireBase = {};
     appId: "1:873374776677:web:fba4eec6d6507d0af4758c"
   };
 
-  const {initializeApp} = require('firebase/app');
-  const {getDatabase} = require('firebase/database');
-
-  // Initialize Firebase
-  app_fireBase = initializeApp(config);
-
-  const database = getDatabase(app_fireBase);
+// Initialize Firebase
+  const app_fireBase = initializeApp(firebaseConfig);
 
   function fnCreate(path, body, callBack){
     if(!path || !body) return;
-    database.ref(path).set(body, callBack);
+    app_fireBase.database().ref(path).set(body, callBack);
   }
 
   function fnUpdate(path, body, callBack){
     if(!path || !body) return;
-    database.ref(path).update(body, callBack);
+    app_fireBase.database().ref(path).update(body, callBack);
   }
 
   function fnListen(path, callBack){
     if(!path || !callBack) return;
 
-    var listen = database.ref(path);
+    var listen = app_fireBase.database().ref(path);
     listen.on('value', function(snapshot) {
       callBack(snapshot.val());
     });
@@ -47,8 +42,10 @@ var app_fireBase = {};
   function fnGet(path, successCallback, errorCallBack){
     if(!path || !successCallback || !errorCallBack) return;
     
-    database.ref(path).once('value').then(successCallback, errorCallBack)
+    app_fireBase.database().ref(path).once('value').then(successCallback, errorCallBack)
   }
+
+
 
   app_fireBase.databaseApi = {
     create: fnCreate,
