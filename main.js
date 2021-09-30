@@ -29,7 +29,7 @@ var lastPredictID = null;
             console.log(err);
         }
     }
-
+    var textField = document.getElementById("textOutput");
     window.addEventListener("load", async () => {
         textField.innerHTML = ("Reading NFC");
       
@@ -109,7 +109,5 @@ var lastPredictID = null;
         document.getElementById("recyclingIcon").style.display = 'block';
         document.getElementById("loaderCircle").style.display = 'none';
     }
-
-    mainApp.scan = scan;
     mainApp.logOut = logOut;
 })()
