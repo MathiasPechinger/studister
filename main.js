@@ -6,13 +6,9 @@ var lastPredictID = null;
         if(user){
             //user signed in.
             uid = user.uid;
-            var path = 'devices/your_device_id/control';
-            app_fireBase.databaseApi.listen(path, controlCallBack);
-
-            var path = 'devices/your_device_id/control/';
-            var data = {measure: 'false'};
+            var path = 'users/';
+            var data = {uid: `${uid}`};
             app_fireBase.databaseApi.update(path, data, messageHandler);
-            hidePlasticIcon();
         }else{
             //redirect to login page
             uid = null;
