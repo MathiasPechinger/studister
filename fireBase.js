@@ -1,13 +1,7 @@
 var app_fireBase = {};
 (function(){
-
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
   // Your web app's Firebase configuration
-  const firebaseConfig = {
+  const config = {
     apiKey: "AIzaSyDRNEQbVnhlmbimWlWkmOi_WcW-EP1Bk8c",
     authDomain: "studister-4b944.firebaseapp.com",
     databaseURL: "https://studister-4b944-default-rtdb.europe-west1.firebasedatabase.app",
@@ -17,9 +11,10 @@ var app_fireBase = {};
     appId: "1:873374776677:web:fba4eec6d6507d0af4758c"
   };
 
-// Initialize Firebase
-  const app_fireBase = initializeApp(firebaseConfig);
+  firebase.initializeApp(config);
 
+  app_fireBase = firebase;
+  
   function fnCreate(path, body, callBack){
     if(!path || !body) return;
     app_fireBase.database().ref(path).set(body, callBack);
@@ -45,8 +40,6 @@ var app_fireBase = {};
     app_fireBase.database().ref(path).once('value').then(successCallback, errorCallBack)
   }
 
-
-
   app_fireBase.databaseApi = {
     create: fnCreate,
     update: fnUpdate,
@@ -55,3 +48,4 @@ var app_fireBase = {};
   }
 
 })()
+

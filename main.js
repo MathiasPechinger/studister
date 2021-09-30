@@ -1,14 +1,10 @@
 var mainApp = {};
 var lastPredictID = null;
 (function(){
-    var firebase = app_fireBase;  
-    firebase.auth().onAuthStateChanged(function(user) {
+    app_fireBase.auth().onAuthStateChanged(function(user) {
         if(user){
             //user signed in.
             uid = user.uid;
-            var path = 'users/';
-            var data = {uid: `${uid}`};
-            app_fireBase.databaseApi.update(path, data, messageHandler);
         }else{
             //redirect to login page
             uid = null;
@@ -17,7 +13,7 @@ var lastPredictID = null;
     });
 
     function logOut(){
-        firebase.auth().signOut();
+        app_fireBase.auth().signOut();
     }
 
     function messageHandler(err){
@@ -29,6 +25,13 @@ var lastPredictID = null;
     var enableScanButton = document.getElementById("scanButton");
     enableScanButton.addEventListener("click", async () => {
         textField.innerHTML = ("Reading NFC");
+        var path = '/';
+        var data = {
+            username: "name",
+            email: "test",
+            profile_picture : "hello"
+        };
+        app_fireBase.database().ref(path).set(data);
         try {
             const ndef = new NDEFReader();
             await ndef.scan();
