@@ -12,6 +12,7 @@ var app_fireBase = {};
   };
 
   app_fireBase = firebase.initializeApp(config);
+  
   const db = app_fireBase.database();
   function fnCreate(path, body, callBack){
     if(!path || !body) return;

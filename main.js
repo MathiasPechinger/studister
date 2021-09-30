@@ -25,15 +25,16 @@ var lastPredictID = null;
     var enableScanButton = document.getElementById("scanButton");
     enableScanButton.addEventListener("click", async () => {
         textField.innerHTML = ("Reading NFC");
-        app_fireBase.database().ref("/users").then((snapshot) => {
-            if (snapshot.exists()) {
-              console.log(snapshot.val());
-            } else {
-              console.log("No data available");
-            }
-          }).catch((error) => {
-            console.error(error);
-          });
+        const dbRef = app_fireBase.database().ref();
+        dbRef.child("users").get().then((snapshot) => {
+        if (snapshot.exists()) {
+            console.log(snapshot.val());
+        } else {
+            console.log("No data available");
+        }
+        }).catch((error) => {
+        console.error(error);
+        });
         try {
             const ndef = new NDEFReader();
             await ndef.scan();
