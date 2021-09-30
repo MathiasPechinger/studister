@@ -7,11 +7,11 @@
 }
 
 .logo {
-    height: 100px;
+    height: 50px;
     width: auto;
     /* background-color: dimgray; */
     text-align: center;
-    padding-top: 50px;
+    padding-top: 20px;
 }
 
 .container{
