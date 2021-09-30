@@ -81,7 +81,25 @@ header {
     font-family: 'Amatic SC', cursive;
     font-size: 24px;
     box-shadow: 5px 5px 10px #BCBCBC;
+}
 
+.scan:hover {
+    color:#000000;
+    background: rgb(246, 175, 113);
+    background: linear-gradient(90deg, rgba(223,105,0,1) 0%, rgba(222,148,41,1) 35%, rgba(255,255,255,1) 100%);
+}
+
+.scan:active{
+    color:#BBBBBB;
+    border: black;
+    border-color:#181616;
+}
+
+@media all and (max-width:30em){
+     .scan{
+    display:block;
+    margin:0.4em auto;
+    }
 }
 
 .result_wrap {
