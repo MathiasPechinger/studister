@@ -7,13 +7,13 @@ var app_fireBase = {};
 
   // Your web app's Firebase configuration
   const config = {
-    apiKey: "AIzaSyBmjAh0b4OzR3rXFSbceT-narQIwTtD7eA",
-    authDomain: "spectrometer-interface.firebaseapp.com",
-    databaseURL: "https://spectrometer-interface.firebaseio.com",
-    projectId: "spectrometer-interface",
-    storageBucket: "spectrometer-interface.appspot.com",
-    messagingSenderId: "187409676704",
-    appId: "1:187409676704:web:7ebc80e4a8923e4c624cc5"
+    apiKey: "AIzaSyDRNEQbVnhlmbimWlWkmOi_WcW-EP1Bk8c",
+    authDomain: "studister-4b944.firebaseapp.com",
+    databaseURL: "https://studister-4b944-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "studister-4b944",
+    storageBucket: "studister-4b944.appspot.com",
+    messagingSenderId: "873374776677",
+    appId: "1:873374776677:web:fba4eec6d6507d0af4758c"
   };
 
   // Initialize Firebase
