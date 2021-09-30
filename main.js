@@ -31,17 +31,9 @@ var lastPredictID = null;
         }
     }
 
-    function scan(){
-        var path = 'devices/your_device_id/control/';
-        var data = {measure: 'true'};
-        app_fireBase.databaseApi.update(path, data, messageHandler);
-        hidePlasticIcon();
-        document.getElementById("scan_button").disabled = true;
-    }
-
-    window.addEventListener("load", async () => {
+    window.addEventListener("load", function(event) {
         textField.innerHTML = ("Reading NFC");
-      
+
         try {
           const ndef = new NDEFReader();
           await ndef.scan();
@@ -50,7 +42,7 @@ var lastPredictID = null;
           ndef.addEventListener("readingerror", () => {
             textField.innerHTML = ("Argh! Cannot read data from the NFC tag. Try another one?");
           });
-    
+
           ndef.addEventListener("reading", ({ _, serialNumber }) => {
             textField.innerHTML = (`> Serial Number: ${serialNumber}`);
             var path = 'scans/';
@@ -62,7 +54,6 @@ var lastPredictID = null;
         }
       }
     );
-
     
     var updatePlasticIcon = function(id, text) {
 
