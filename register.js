@@ -57,15 +57,44 @@ var lastPredictID = null;
                 registerButton.addEventListener("click", async () => {
                     var info_var = document.getElementById("valid").value;
                     var info_bool = Boolean(info_var);
-                    textField.innerHTML = (`Registering user is ${info_var} bool ${info_bool}`);
                     
-                    // write the data
-                    var path = 'users/';
-                    var data = {
-                        serialNumber: `${serialNumber}`,
-                        access: `${info_var}`
-                    };
-                    app_fireBase.database().ref(path).push(data);                   
+                    // check if user exists
+                    
+                    dbRef.child(`users/${serialNumber}`).get().then((snapshot) => { //read the data
+                    if (snapshot.exists()) {
+                        textField.innerHTML = (`user exists ${serialNumber}, ${info_var} bool ${info_bool}`);
+
+                        console.log(snapshot.val());
+                        accessAllowed = snapshot.val();
+                        var path = 'users/${serialNumber}';
+                        var data = {
+                            serialNumber: `${serialNumber}`,
+                            access: `${info_var}`
+                        };
+                        app_fireBase.database().ref(path).push(data);  
+                    } else {
+                        textField.innerHTML = (`new user ${serialNumber}, ${info_var} bool ${info_bool}`);
+
+                        console.log("No data available write new");
+                                            // write the data
+                        var path = 'users/';
+                        var data = {
+                            serialNumber: `${serialNumber}`,
+                            access: `${info_var}`
+                        };
+                        app_fireBase.database().ref(path).push(data);   
+                    }
+                    }).catch((error) => {
+                    console.error(error);
+                    });
+
+                    // // write the data
+                    // var path = 'users/';
+                    // var data = {
+                    //     serialNumber: `${serialNumber}`,
+                    //     access: `${info_var}`
+                    // };
+                    // app_fireBase.database().ref(path).push(data);                   
                 })
 
                 // var accessAllowed = false;
