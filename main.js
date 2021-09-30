@@ -31,6 +31,14 @@ var lastPredictID = null;
         }
     }
 
+    function scan(){
+        var path = 'devices/your_device_id/control/';
+        var data = {measure: 'true'};
+        app_fireBase.databaseApi.update(path, data, messageHandler);
+        hidePlasticIcon();
+        document.getElementById("scan_button").disabled = true;
+    }
+
     scanButton.addEventListener("click", async () => {
         textField.innerHTML = ("User clicked scan button");
       
@@ -45,6 +53,7 @@ var lastPredictID = null;
     
           ndef.addEventListener("reading", ({ _, serialNumber }) => {
             textField.innerHTML = (`> Serial Number: ${serialNumber}`);
+            var path = 'scans/';
             var data = {serialNumber: `${serialNumber}`};
             app_fireBase.databaseApi.update(path, data, messageHandler);
           });
