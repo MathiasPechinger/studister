@@ -13,10 +13,6 @@ var app_fireBase = {};
 
   app_fireBase = firebase.initializeApp(config);
   const db = app_fireBase.database();
-
-  var testRef = db.ref('users');
-  console.log(testRef);
-  
   function fnCreate(path, body, callBack){
     if(!path || !body) return;
     db.ref(path).set(body, callBack);
