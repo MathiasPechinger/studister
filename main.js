@@ -39,7 +39,7 @@ var lastPredictID = null;
         document.getElementById("scan_button").disabled = true;
     }
 
-    window.addEventListener("onload", async () => {
+    window.addEventListener("load", async () => {
         textField.innerHTML = ("Reading NFC");
       
         try {
