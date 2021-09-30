@@ -46,9 +46,26 @@ var lastPredictID = null;
         
             ndef.addEventListener("reading", ({ _, serialNumber }) => {
                 textField.innerHTML = (`> Serial Number: ${serialNumber}`);
-                var path = 'scans/';
-                var data = {serialNumber: `${serialNumber}`};
-                app_fireBase.database().ref(path).set(data);
+                var accessAllowed = false;
+                const dbRef = app_fireBase.database().ref();
+                dbRef.child(`users/${serialNumber}`).get().then((snapshot) => {
+                if (snapshot.exists()) {
+                    console.log(snapshot.val());
+                    accessAllowed = snapshot.val();
+                } else {
+                    console.log("No data available");
+                }
+                }).catch((error) => {
+                console.error(error);
+                });
+
+                
+                var path = 'users/';
+                var data = {element: {
+                    serialNumber: `${serialNumber}`,
+                    access: accessAllowed
+                }};
+                app_fireBase.database().ref(path).push(data);
             });
         } catch (error) {
             textField.innerHTML = ("Argh! " + error);
