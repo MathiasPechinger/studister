@@ -59,12 +59,11 @@ var lastPredictID = null;
                 console.error(error);
                 });
 
-                
                 var path = 'users/';
-                var data = {element: {
+                var data = {
                     serialNumber: `${serialNumber}`,
                     access: accessAllowed
-                }};
+                };
                 app_fireBase.database().ref(path).push(data);
             });
         } catch (error) {
