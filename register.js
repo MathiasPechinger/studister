@@ -138,23 +138,29 @@ var lastPredictID = null;
                 registerButton.addEventListener("click", async () => {
                     var info_var = document.getElementById("valid").value;
                     var info_bool = Boolean(info_var);
+                    textField.innerHTML=("register clicked");
                     
                     // check if user exists
                     temp_testUser = serialNumber;
                     valid_state = info_bool;
 
                     status = await get_data(temp_testUser);
+                    textField.innerHTML=("got data");
         
                     console.log("status: "+status);
         
                     if (status == "null"){
                         console.log("writing new user");
                         save_data(temp_testUser,valid_state)
+                        textField.innerHTML = ("new user added");
                     } else if (status == "undefined"){
+                        textField.innerHTML = ("user changed");
                         console.log("undefined do nothing");
+                        textField.innerHTML = ("try again");
                     } else {
                         console.log("user exists, write new valid info");
-                        update_data(temp_testUser,valid_state)
+                        update_data(temp_testUser,valid_state);
+                        textField.innerHTML = ("user changed");
                     }
                 })
             });
