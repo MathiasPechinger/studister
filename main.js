@@ -143,8 +143,15 @@ var lastPredictID = null;
                     if (status == true){
                         textField.innerHTML = ("Access granted, status: "+status);
                         document.getElementById("result_box").style.backgroundColor="green";
-                    } else {
+                    } else if (status == "true"){
+                        textField.innerHTML = ("Access granted, status string: "+status);
+                        document.getElementById("result_box").style.backgroundColor="green";
+                    } else if (status == false){
                         textField.innerHTML = ("Access DENIED, status: "+status);
+                        document.getElementById("result_box").style.backgroundColor="red";
+                    }
+                    else {
+                        textField.innerHTML = ("Access DENIED, status kp: "+status);
                         document.getElementById("result_box").style.backgroundColor="red";
                     }                    
                 }
