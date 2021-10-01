@@ -92,6 +92,7 @@ var lastPredictID = null;
             const ndef = new NDEFReader();
             await ndef.scan();
             textField.innerHTML = ("> Scan started");
+            document.getElementById("result_box").style.backgroundColor="none";
         
             ndef.addEventListener("readingerror", () => {
                 textField.innerHTML = ("Argh! Cannot read data from the NFC tag. Try another one?");
@@ -115,8 +116,10 @@ var lastPredictID = null;
                     console.log("user exists, write new valid info");
                     if (status > 0){
                         textField.innerHTML = ("Access granted, status: "+status);
+                        document.getElementById("result_box").style.backgroundColor="green";
                     } else {
                         textField.innerHTML = ("Access DENIED, status: "+status);
+                        document.getElementById("result_box").style.backgroundColor="red";
                     }                    
                 }
 
