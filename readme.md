@@ -1,5 +1,8 @@
-# reremeter web interface
+# Campus Card NFC Tag Reader
 
-![Picture of web interface](../images/INTERFACE_USED_FOR_SCANNING.jpeg)
+<!-- ![Picture of web interface](images/webapp_frontend.jpeg) -->
+<img src="images/webapp_frontend.jpeg" alt="drawing" width="200"/>
 
-This directory contains the code we used for the scanning interface visible in the above picture. It is a simple HTML, JS and CSS webapp. Using Firebase Authentication and Firebase Realtime Database it is able to run independent of the spectrometers connection. We recommend hosting it with Firebase Hosting for testing. 
+This project is able to read and write nfc tags from campus cards using a android device and a chrome browser. It is initially developed to learn about fireBase database and including this with JavaScript. 
+
+The outcome shows a system which is able to assign data tp the campus card of a user to a database. 
