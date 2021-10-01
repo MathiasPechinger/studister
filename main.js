@@ -114,7 +114,7 @@ var lastPredictID = null;
                 } else {
                     textField.innerHTML = ("User found: "+status);
                     console.log("user exists, write new valid info");
-                    if (status > 0){
+                    if (status == "1"){
                         textField.innerHTML = ("Access granted, status: "+status);
                         document.getElementById("result_box").style.backgroundColor="green";
                     } else {
