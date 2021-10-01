@@ -72,43 +72,42 @@ var lastPredictID = null;
 
 
     var textField = document.getElementById("textOutput");
-
     var enableScanButton = document.getElementById("scanButton");
-
+    
     enableScanButton.addEventListener("click", async () => {
 
         textField.innerHTML = ("Reading NFC");
         const dbRef = app_fireBase.database().ref();
         dbRef.child("users").get().then(async(snapshot) => {
         if (snapshot.exists()) {
-            console.log("------------new log-------------");
-            serialNumber = "3456";
-            status = await get_data(serialNumber);
+            // console.log("------------new log-------------");
+            // serialNumber = "3456";
+            // status = await get_data(serialNumber);
             
-            if (status == "null"){
-                textField.innerHTML = ("User doesn't exist! Status: "+status);
-                console.log("user does not exsit");
-            } else if (status == "undefined"){
-                console.log("undefined do nothing");
-                textField.innerHTML = ("try again: "+status);
-            } else {
-                textField.innerHTML = ("User found: "+status);
-                console.log("user exists, write new valid info");
-                if (status == "true"){
-                    textField.innerHTML = ("Access granted, status string: "+status);
-                    document.getElementById("result_box").style.backgroundColor="green";
-                    console.log("granted"+status);
-                }
-                else if(status == true){
-                    textField.innerHTML = ("Access granted, status 2: "+status);
-                    document.getElementById("result_box").style.backgroundColor="green";
-                    console.log("granted"+status);
-                } else {
-                    textField.innerHTML = ("Access DENIED, status test: "+status);
-                    document.getElementById("result_box").style.backgroundColor="red";
-                    console.log("denies"+status);
-                }                    
-            }
+            // if (status == "null"){
+            //     textField.innerHTML = ("User doesn't exist! Status: "+status);
+            //     console.log("user does not exsit");
+            // } else if (status == "undefined"){
+            //     console.log("undefined do nothing");
+            //     textField.innerHTML = ("try again: "+status);
+            // } else {
+            //     textField.innerHTML = ("User found: "+status);
+            //     console.log("user exists, write new valid info");
+            //     if (status == "true"){
+            //         textField.innerHTML = ("Access granted, status string: "+status);
+            //         document.getElementById("result_box").style.backgroundColor="green";
+            //         console.log("granted"+status);
+            //     }
+            //     else if(status == true){
+            //         textField.innerHTML = ("Access granted, status 2: "+status);
+            //         document.getElementById("result_box").style.backgroundColor="green";
+            //         console.log("granted"+status);
+            //     } else {
+            //         textField.innerHTML = ("Access DENIED, status test: "+status);
+            //         document.getElementById("result_box").style.backgroundColor="red";
+            //         console.log("denies"+status);
+            //     }                    
+            // }
         } else {
             console.log("No data available");
         }
