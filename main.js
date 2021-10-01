@@ -102,6 +102,7 @@ var lastPredictID = null;
                 textField.innerHTML = (`> Serial Number: ${serialNumber}`);
                 var accessAllowed = false;
 
+                textField.innerHTML = ("Waiting for data: "+temp_testUser);
                 //get user info
                 status = await get_data(temp_testUser);
                 
@@ -111,13 +112,13 @@ var lastPredictID = null;
                     console.log("undefined do nothing");
                     textField.innerHTML = ("try again: "+status);
                 } else {
+                    textField.innerHTML = ("User found: "+status);
                     console.log("user exists, write new valid info");
                     if (status > 0){
                         textField.innerHTML = ("Access granted, status: "+status);
                     } else {
                         textField.innerHTML = ("Access DENIED, status: "+status);
-                    }
-                    
+                    }                    
                 }
 
                 // const dbRef = app_fireBase.database().ref();
