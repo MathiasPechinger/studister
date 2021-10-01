@@ -1,6 +1,7 @@
 var mainApp = {};
 var lastPredictID = null;
 (function(){
+    let dbBase = app_fireBase.database();
     app_fireBase.auth().onAuthStateChanged(function(user) {
         if(user){
             //user signed in.
@@ -23,6 +24,67 @@ var lastPredictID = null;
     }
     var textField = document.getElementById("textOutput");
 
+    function save_data(hash_key,status) {
+      
+        dbBase.ref('users/' + hash_key).set({
+          status : status,
+          hash_key : hash_key
+        })
+        // alert('Saved data')
+    }
+
+    async function get_data(hash_key) {
+
+        var user_ref = dbBase.ref('users/' + hash_key)
+        let data;
+        await user_ref.on('value', async function(snapshot) {
+            data = snapshot.val();
+            if(data == null){
+                console.log("user doesn't exist")
+                return new Promise(resolve => {
+                    data = null;
+                    resolve(data);
+                });
+            } else{
+                if (data.status == null){
+                    alert('error code 0x001');
+                }else{
+                    // console.log(data.status);
+                    return new Promise(resolve => {
+                        resolve(data.status);
+                    },
+                    reject => {
+                        reject(null);
+                        alert('error code 0x002');
+                    });
+                }
+            }
+        });
+        return new Promise(resolve => {
+            if(data == null) {
+                resolve(data);
+            }
+            else if (data == undefined) 
+            {
+                // alert('error code 0x003');
+                // reslove(await get_data(hash_key));
+                // todo: find issue on first start... (BUG!) 
+            }
+            else{
+                resolve(data.status);
+            }
+            
+            
+        });
+    }
+
+      function update_data(hash_key,status) {
+
+        var updates = {status : status}
+        dbBase.ref('users/' + hash_key).update(updates)
+        // alert('update successfull')
+      }
+
 
     var enableScanButton = document.getElementById("scanRegButton");
     var registerButton = document.getElementById("registerButton");
@@ -31,9 +93,28 @@ var lastPredictID = null;
 
         textField.innerHTML = ("Reading NFC");
         const dbRef = app_fireBase.database().ref();
-        dbRef.child("users").get().then((snapshot) => {
+        dbRef.child("users").get().then(async (snapshot) => {
         if (snapshot.exists()) {
-            console.log(snapshot.val());
+            // console.log(snapshot.val());
+            // save_data("0816","4");
+            // console.log("-------New Log--------")
+
+            // temp_testUser = "0819";
+            // valid_state = 4;
+            // status = await get_data(temp_testUser);
+
+            // console.log("status: "+status);
+
+            // if (status == "null"){
+            //     console.log("writing new user");
+            //     save_data(temp_testUser,valid_state)
+            // } else if (status == "undefined"){
+            //     console.log("undefined do nothing");
+            // } else {
+            //     console.log("user exists, write new valid info");
+            //     update_data(temp_testUser,valid_state)
+            // }
+            
         } else {
             console.log("No data available for Reg");
         }
@@ -59,67 +140,23 @@ var lastPredictID = null;
                     var info_bool = Boolean(info_var);
                     
                     // check if user exists
-                    
-                    dbRef.child(`users/${serialNumber}`).get().then((snapshot) => { //read the data
-                    if (snapshot.exists()) {
-                        textField.innerHTML = (`user exists ${serialNumber}, ${info_var} bool ${info_bool}`);
+                    temp_testUser = serialNumber;
+                    valid_state = info_bool;
 
-                        console.log(snapshot.val());
-                        accessAllowed = snapshot.val();
-                        var path = 'users/${serialNumber}';
-                        var data = {
-                            serialNumber: `${serialNumber}`,
-                            access: `${info_var}`
-                        };
-                        app_fireBase.database().ref(path).push(data);  
+                    status = await get_data(temp_testUser);
+        
+                    console.log("status: "+status);
+        
+                    if (status == "null"){
+                        console.log("writing new user");
+                        save_data(temp_testUser,valid_state)
+                    } else if (status == "undefined"){
+                        console.log("undefined do nothing");
                     } else {
-                        textField.innerHTML = (`new user ${serialNumber}, ${info_var} bool ${info_bool}`);
-
-                        console.log("No data available write new");
-                                            // write the data
-                        var path = 'users/';
-                        var data = {
-                            serialNumber: `${serialNumber}`,
-                            access: `${info_var}`
-                        };
-                        app_fireBase.database().ref(path).push(data);   
+                        console.log("user exists, write new valid info");
+                        update_data(temp_testUser,valid_state)
                     }
-                    }).catch((error) => {
-                    console.error(error);
-                    });
-
-                    // // write the data
-                    // var path = 'users/';
-                    // var data = {
-                    //     serialNumber: `${serialNumber}`,
-                    //     access: `${info_var}`
-                    // };
-                    // app_fireBase.database().ref(path).push(data);                   
                 })
-
-                // var accessAllowed = false;
-                // const dbRef = app_fireBase.database().ref();
-
-                // //read the data
-                // dbRef.child(`users/${serialNumber}`).get().then((snapshot) => {
-                // if (snapshot.exists()) {
-                //     console.log(snapshot.val());
-                //     accessAllowed = snapshot.val();
-                // } else {
-                //     console.log("No data available");
-                // }
-                // }).catch((error) => {
-                // console.error(error);
-                // });
-
-
-                // //write the data
-                // var path = 'users/';
-                // var data = {
-                //     serialNumber: `${serialNumber}`,
-                //     access: accessAllowed
-                // };
-                // app_fireBase.database().ref(path).push(data);
             });
         } catch (error) {
             textField.innerHTML = ("Argh! " + error);
