@@ -101,9 +101,9 @@ var lastPredictID = null;
             ndef.addEventListener("reading", async ({ _, serialNumber }) => {
                 textField.innerHTML = (`> Serial Number is: ${serialNumber}`);
 
-                textField.innerHTML = ("Waiting for data: "+temp_testUser);
+                textField.innerHTML = ("Waiting for data: "+serialNumber);
                 //get user info
-                status = await get_data(temp_testUser);
+                status = await get_data(serialNumber);
                 
                 if (status == "null"){
                     textField.innerHTML = ("User doesn't exist! Status: "+status);
