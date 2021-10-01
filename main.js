@@ -99,8 +99,7 @@ var lastPredictID = null;
         
             // read serial number from card
             ndef.addEventListener("reading", async ({ _, serialNumber }) => {
-                textField.innerHTML = (`> Serial Number: ${serialNumber}`);
-                var accessAllowed = false;
+                textField.innerHTML = (`> Serial Number is: ${serialNumber}`);
 
                 textField.innerHTML = ("Waiting for data: "+temp_testUser);
                 //get user info
