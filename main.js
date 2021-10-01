@@ -98,7 +98,7 @@ var lastPredictID = null;
             });
         
             // read serial number from card
-            ndef.addEventListener("reading", ({ _, serialNumber }) => {
+            ndef.addEventListener("reading", async ({ _, serialNumber }) => {
                 textField.innerHTML = (`> Serial Number: ${serialNumber}`);
                 var accessAllowed = false;
 
