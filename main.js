@@ -140,41 +140,15 @@ var lastPredictID = null;
                 } else {
                     textField.innerHTML = ("User found: "+status);
                     console.log("user exists, write new valid info");
-                    if (status == true){
-                        textField.innerHTML = ("Access granted, status: "+status);
+                    if (status == "true"){
+                        textField.innerHTML = ("Access granted");
                         document.getElementById("result_box").style.backgroundColor="green";
-                    } else if (status == "true"){
-                        textField.innerHTML = ("Access granted, status string: "+status);
-                        document.getElementById("result_box").style.backgroundColor="green";
-                    } else if (status == false){
-                        textField.innerHTML = ("Access DENIED, status: "+status);
-                        document.getElementById("result_box").style.backgroundColor="red";
                     }
                     else {
-                        textField.innerHTML = ("Access DENIED, status kp: "+status);
+                        textField.innerHTML = ("Access DENIED");
                         document.getElementById("result_box").style.backgroundColor="red";
                     }                    
                 }
-
-                // const dbRef = app_fireBase.database().ref();
-
-                // dbRef.child(`users/${serialNumber}`).get().then((snapshot) => {
-                // if (snapshot.exists()) {
-                //     console.log(snapshot.val());
-                //     accessAllowed = snapshot.val();
-                // } else {
-                //     console.log("No data available");
-                // }
-                // }).catch((error) => {
-                // console.error(error);
-                // });
-
-                // var path = 'users/';
-                // var data = {
-                //     serialNumber: `${serialNumber}`,
-                //     access: accessAllowed
-                // };
-                // app_fireBase.database().ref(path).push(data);
             });
         } catch (error) {
             textField.innerHTML = ("Argh! " + error);
