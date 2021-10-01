@@ -145,10 +145,7 @@ var lastPredictID = null;
                     valid_state = info_bool;
 
                     status = await get_data(temp_testUser);
-                    textField.innerHTML=("register clicked");
-        
-                    console.log("status: "+status);
-        
+                
                     if (status == "null"){
                         console.log("writing new user");
                         save_data(temp_testUser,valid_state)
