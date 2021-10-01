@@ -114,6 +114,7 @@ var lastPredictID = null;
             //     console.log("user exists, write new valid info");
             //     update_data(temp_testUser,valid_state)
             // }
+
             
         } else {
             console.log("No data available for Reg");
@@ -137,8 +138,13 @@ var lastPredictID = null;
                 // Wait for user entry
                 registerButton.addEventListener("click", async () => {
                     var info_var = document.getElementById("valid").value;
-                    var info_bool = Boolean(info_var);
-                    textField.innerHTML=("register clicked");
+                    var info_bool = false;
+                    if (info_var == "0"){
+                        info_bool = false;
+                    } else if (info_var == "1"){
+                        info_bool = true;
+                    } 
+
                     
                     // check if user exists
                     temp_testUser = serialNumber;

@@ -79,9 +79,31 @@ var lastPredictID = null;
 
         textField.innerHTML = ("Reading NFC");
         const dbRef = app_fireBase.database().ref();
-        dbRef.child("users").get().then((snapshot) => {
+        dbRef.child("users").get().then(async(snapshot) => {
         if (snapshot.exists()) {
-            console.log(snapshot.val());
+            console.log("------------new log-------------");
+            serialNumber = "3456";
+            status = await get_data(serialNumber);
+            
+            if (status == "null"){
+                textField.innerHTML = ("User doesn't exist! Status: "+status);
+                console.log("user does not exsit");
+            } else if (status == "undefined"){
+                console.log("undefined do nothing");
+                textField.innerHTML = ("try again: "+status);
+            } else {
+                textField.innerHTML = ("User found: "+status);
+                console.log("user exists, write new valid info");
+                if (status == "1"){
+                    textField.innerHTML = ("Access granted, status: "+status);
+                    document.getElementById("result_box").style.backgroundColor="green";
+                    console.log("granted"+status);
+                } else {
+                    textField.innerHTML = ("Access DENIED, status: "+status);
+                    document.getElementById("result_box").style.backgroundColor="red";
+                    console.log("denies"+status);
+                }                    
+            }
         } else {
             console.log("No data available");
         }
