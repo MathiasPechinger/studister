@@ -95,7 +95,12 @@ var lastPredictID = null;
                 textField.innerHTML = ("User found: "+status);
                 console.log("user exists, write new valid info");
                 if (status == "true"){
-                    textField.innerHTML = ("Access granted, status: "+status);
+                    textField.innerHTML = ("Access granted, status string: "+status);
+                    document.getElementById("result_box").style.backgroundColor="green";
+                    console.log("granted"+status);
+                }
+                else if(status == true){
+                    textField.innerHTML = ("Access granted, status 2: "+status);
                     document.getElementById("result_box").style.backgroundColor="green";
                     console.log("granted"+status);
                 } else {
