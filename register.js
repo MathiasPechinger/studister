@@ -145,22 +145,21 @@ var lastPredictID = null;
                     valid_state = info_bool;
 
                     status = await get_data(temp_testUser);
-                    textField.innerHTML=("got data");
+                    textField.innerHTML=("register clicked");
         
                     console.log("status: "+status);
         
                     if (status == "null"){
                         console.log("writing new user");
                         save_data(temp_testUser,valid_state)
-                        textField.innerHTML = ("new user added");
+                        textField.innerHTML = ("new user added: "+status);
                     } else if (status == "undefined"){
-                        textField.innerHTML = ("user changed");
                         console.log("undefined do nothing");
-                        textField.innerHTML = ("try again");
+                        textField.innerHTML = ("try again: "+status);
                     } else {
                         console.log("user exists, write new valid info");
                         update_data(temp_testUser,valid_state);
-                        textField.innerHTML = ("user changed");
+                        textField.innerHTML = ("user exists, write new valid: "+status);
                     }
                 })
             });
