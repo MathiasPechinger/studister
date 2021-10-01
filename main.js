@@ -104,7 +104,7 @@ var lastPredictID = null;
                     document.getElementById("result_box").style.backgroundColor="green";
                     console.log("granted"+status);
                 } else {
-                    textField.innerHTML = ("Access DENIED, status: "+status);
+                    textField.innerHTML = ("Access DENIED, status test: "+status);
                     document.getElementById("result_box").style.backgroundColor="red";
                     console.log("denies"+status);
                 }                    
